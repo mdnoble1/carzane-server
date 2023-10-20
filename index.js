@@ -36,12 +36,19 @@ async function run() {
     await client.connect();
 
     const brandsCollection = client.db('carzane').collection('brands');
+    const productsCollection = client.db('carzane').collection('products');
 
     app.get('/brands', async (req, res) => {
       const cursor = brandsCollection.find()
       const result = await cursor.toArray();
       res.send(result);
     });
+
+    app.post('/products' , async(req , res) => {
+        const newProduct = req.body;
+        const result = await productsCollection.insertOne(newProduct);
+        res.send(result);
+    })
 
 
 
