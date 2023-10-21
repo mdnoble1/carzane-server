@@ -29,6 +29,7 @@ async function run() {
 
     const brandsCollection = client.db("carzane").collection("brands");
     const productsCollection = client.db("carzane").collection("products");
+    const adsCollection = client.db("carzane").collection("ads");
 
     app.get("/brands", async (req, res) => {
       const cursor = brandsCollection.find();
@@ -43,6 +44,10 @@ async function run() {
     });
 
 
+    
+
+
+
     app.get("/products/:id" , async(req , res) => {
       const id = req.params.id;
       const query = { _id : new ObjectId(id)};
@@ -50,12 +55,12 @@ async function run() {
       res.send(result);
     })
 
-    app.get("/products?:id" , async(req , res) => {
-      const id = req.params.id;
-      const query = {_id: new ObjectId(id)};
-      const result = await productsCollection.findOne(query);
-      res.send(result);
-    })
+    // app.get("/products/:id" , async(req , res) => {
+    //   const id = req.params.id;
+    //   const query = {_id: new ObjectId(id)};
+    //   const result = await productsCollection.findOne(query);
+    //   res.send(result);
+    // })
 
 
     app.post("/products", async (req, res) => {
